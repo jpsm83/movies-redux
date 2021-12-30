@@ -5,6 +5,7 @@ export default function Header() {
     return (
         <div>
             <UserIcon />
+            <UserIcon />
         </div>
     )
 }
