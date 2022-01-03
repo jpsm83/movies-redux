@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./Home.scss";
 import MovieList from "../../components/MovieList/MovieList";
 import movieApi from "../../common/apis/movieApi";
-import movieApiKey from "../../common/apis/movieApiKey";
+import { movieApiKey } from "../../common/apis/movieApiKey";
 
 export default function Home() {
 
@@ -25,7 +25,9 @@ export default function Home() {
 
   return (
     <div>
-      <div className="banner-img"></div>
+      <div className="banner-img">
+        <h1>hola</h1>
+      </div>
       <MovieList />
     </div>
   );

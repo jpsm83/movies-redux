@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <div className="header">
       <Link to="/">
-        <div className="logo">Movies Redux</div>
+        <h2 className="app-title">Movies Redux</h2>
       </Link>
       <div className="user-image">
         <UserIcon />
