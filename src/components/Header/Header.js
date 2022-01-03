@@ -1,11 +1,17 @@
-import React from 'react';
-import { UserIcon } from '@heroicons/react/solid';
+import React from "react";
+import { UserIcon } from "@heroicons/react/solid";
+import { Link } from "react-router-dom";
+import "./Header.scss";
 
 export default function Header() {
-    return (
-        <div>
-            <UserIcon />
-            <UserIcon />
-        </div>
-    )
+  return (
+    <div className="header">
+      <Link to="/">
+        <div className="logo">Movies Redux</div>
+      </Link>
+      <div className="user-image">
+        <UserIcon />
+      </div>
+    </div>
+  );
 }

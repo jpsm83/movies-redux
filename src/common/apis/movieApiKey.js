@@ -1,1 +1,1 @@
-export const omdbApiKey = "76312e8b";
+export const movieApiKey = "76312e8b";
