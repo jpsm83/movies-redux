@@ -26,18 +26,14 @@ export default function MovieList() {
     )}
 
   return (
-    <div className="movie-wrapper">
-      <div className="movie-list">
+    <div>
+      <div className="slider-container">
         <h2>Movies</h2>
-        <div className="movie-container">
           <Slider {...Settings}>{renderMoviesOrSeries(movies)}</Slider>
-        </div>
       </div>
-      <div className="movie-list">
+      <div className="slider-container">
         <h2>Series</h2>
-        <div className="movie-container">
         <Slider {...Settings}>{renderMoviesOrSeries(series)}</Slider>
-        </div>
       </div>
     </div>
   );

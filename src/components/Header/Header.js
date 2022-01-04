@@ -26,7 +26,7 @@ export default function Header() {
     dispatch(fetchAsyncMovies(term));
     dispatch(fetchAsyncSeries(term));
     setTerm("");
-    history.push('/')
+    history.push("/");
   };
 
   return (
@@ -34,6 +34,21 @@ export default function Header() {
       <Link to="/">
         <h2 className="app-title">Movies Redux</h2>
       </Link>
+
+      <div className="logo-container">
+        <a href="https://github.com/jpsm83/movies-redux" target="blank">
+          <img src="./images/github.webp" alt="Github logo" className="logo" />
+          <p className="">Code</p>
+        </a>
+      </div>
+
+      <div className="logo-container">
+        <a href="https://www.linkedin.com/in/joaopsmachado/" target="blank">
+          <img src="./images/linkedin.jpg" alt="Linkedin logo" className="logo" />
+          <p className="">Linkedin Joao</p>
+        </a>
+      </div>
+
       <div className="search-bar">
         <form onSubmit={submitHander}>
           <input
@@ -46,9 +61,6 @@ export default function Header() {
             <SearchIcon className="search-icon" />
           </button>
         </form>
-      </div>
-      <div className="user-image">
-        <UserIcon />
       </div>
     </div>
   );

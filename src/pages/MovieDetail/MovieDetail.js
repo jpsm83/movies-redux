@@ -7,6 +7,12 @@ import {
   getSelectedDetail,
   clearDetails,
 } from "../../redux/movies/movieSlice";
+import {
+  StarIcon,
+  ThumbUpIcon,
+  FilmIcon,
+  CalendarIcon,
+} from "@heroicons/react/solid";
 
 export default function MovieDetail() {
   const dispatch = useDispatch();
@@ -21,7 +27,6 @@ export default function MovieDetail() {
   // componentDidMount - DidUpdate - Unomnted
   // thats the first function to be called
   useEffect(() => {
-    
     // an action desceibes what have to be done
     // a dispatch execute an action and send it to the reducer
     dispatch(fetchAsyncDetails(imdbID));
@@ -34,56 +39,56 @@ export default function MovieDetail() {
   }, [dispatch, imdbID]);
 
   return (
-    <div className="movie-section">
+    <div className="main-container">
       {Object.keys(data).length === 0 ? (
-        <div>
+        <div className="loading">
           <p>Loading...</p>
         </div>
       ) : (
-        <div>
+        <div className="detail-container">
           <div className="section-left">
-            <div className="movie-title">{data.Title}</div>
+            <h1 className="movie-title">{data.Title}</h1>
             <div className="movie-rating">
               <span>
-                IMDB Rating <i className="fa fa-star"></i> : {data.imdbRating}
+                IMDB Rating <StarIcon className="icons" /> : {data.imdbRating}
               </span>
               <span>
-                IMDB Votes <i className="fa fa-thumbs-up"></i> :{" "}
-                {data.imdbVotes}
+                IMDB Votes <ThumbUpIcon className="icons" /> : {data.imdbVotes}
               </span>
               <span>
-                Runtime <i className="fa fa-film"></i> : {data.Runtime}
+                Runtime <FilmIcon className="icons" /> : {data.Runtime}
               </span>
               <span>
-                Year <i className="fa fa-calendar"></i> : {data.Year}
+                Year <CalendarIcon className="icons" /> : {data.Year}
               </span>
             </div>
             <div className="movie-plot">{data.Plot}</div>
             <div className="movie-info">
               <div>
-                <span>Director</span>
+                <span>Director:</span>
                 <span>{data.Director}</span>
               </div>
               <div>
-                <span>Stars</span>
+                <span>Stars:</span>
                 <span>{data.Actors}</span>
               </div>
               <div>
-                <span>Generes</span>
+                <span>Generes:</span>
                 <span>{data.Genre}</span>
               </div>
               <div>
-                <span>Languages</span>
+                <span>Languages:</span>
                 <span>{data.Language}</span>
               </div>
               <div>
-                <span>Awards</span>
+                <span>Awards:</span>
                 <span>{data.Awards}</span>
               </div>
             </div>
-            <div className="section-right">
-              <img src={data.Poster} alt={data.Title} />
-            </div>
+          </div>
+
+          <div className="section-right">
+            <img src={data.Poster} alt={data.Title} />
           </div>
         </div>
       )}
