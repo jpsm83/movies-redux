@@ -1,26 +1,80 @@
 // redux-toolkit give us extra features that makes easyer to work with redux
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { APIKey } from "../../common/apis/movieApiKey";
+import movieApi from "../../common/apis/movieApi";
 
 // redux/toolkit allow us to combine "action", "constants" and "reducers" into one file
 
+export const fetchAsyncMovies = createAsyncThunk("movies/fetchAsyncMovies", async () => {
+    const movieText = "Harry";
+    // call the imdb api to get the querry needed - read docs
+      // store re response into a constante to be reused later
+      const response = await movieApi
+        .get(`?apikey=${APIKey}&s=${movieText}&type=movie`)
+      return response.data;
+    }
+)
+
+export const fetchAsyncSeries = createAsyncThunk("series/fetchAsyncSeries", async () => {
+    const serieText = "Friends";
+    // call the imdb api to get the querry needed - read docs
+      // store re response into a constante to be reused later
+      const response = await movieApi
+        .get(`?apikey=${APIKey}&s=${serieText}&type=series`)
+      return response.data;
+    }
+)
+
+export const fetchAsyncDetails = createAsyncThunk("movies/fetchAsyncDetails", async (id) => {
+    // call the imdb api to get the querry needed - read docs
+      // store re response into a constante to be reused later
+      const response = await movieApi
+        .get(`?apikey=${APIKey}&i=${id}&Plot=full`)
+      return response.data;
+    }
+)
+
 const initialState = {
-    movies: {}
+    movies: {},
+    series: {},
+    selectedMovieOrSerie: {},
 }
 
 const movieSlice = createSlice({
     name: "movies",
     initialState,
     reducers: {
-        addMovies: (state, { payload }) => {
-            state.movies = payload;
-            // with redux/toolkit the line above replace the {...state, payload}
-            // it does the same, copy the state and add the payload
+        clearDetails: (state) => {
+            state.selectedMovieOrSerie = {};
         }
     },
-    extraReducers: {}
+    extraReducers: {
+        // "pending", "fulfilled", "rejected" defined the life cicle of the function "fetchAsyncMovies"
+        [fetchAsyncMovies.pending]: () => {
+            console.log("Pending");
+        },
+        [fetchAsyncMovies.fulfilled]: (state, { payload }) => {
+            console.log("Fetched Successfully!");
+            return { ...state, movies: payload };
+        },
+        [fetchAsyncMovies.rejected]: () => {
+            console.log("Rejected!");
+        },
+        [fetchAsyncSeries.fulfilled]: (state, { payload }) => {
+            console.log("Fetched Successfully!");
+            return { ...state, series: payload };
+        },
+        [fetchAsyncDetails.fulfilled]: (state, { payload }) => {
+            console.log("Fetched Successfully!");
+            return { ...state, selectedMovieOrSerie: payload };
+        },
+
+    }
 })
 
-export const { addMovies } = movieSlice.actions;
+export const { clearDetails } = movieSlice.actions;
 // state.<name of the movieSlice>.<property of initialState>
 export const getAllMovies = (state) => state.movies.movies
+export const getAllSeries = (state) => state.movies.series
+export const getSelectedDetail = (state) => state.movies.selectedMovieOrSerie
 export default movieSlice.reducer;
