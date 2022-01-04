@@ -4,8 +4,13 @@ import { getAllMovies, getAllSeries } from "../../redux/movies/movieSlice";
 import "./MovieList.scss";
 import MovieCard from "../MovieCard/MovieCard";
 import "./MovieList.scss";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { Settings } from "../../common/settings";
 
 export default function MovieList() {
+
   // useSelector allow us to select a function exported from "movieSlice"
   const movies = useSelector(getAllMovies);
   const series = useSelector(getAllSeries);
@@ -28,11 +33,12 @@ export default function MovieList() {
     <div className="movie-wrapper">
       <div className="movie-list">
         <h2>Movies</h2>
-        <div className="movie-container">{renderMovies}</div>
+        <div className="movie-container">
+        <Slider {...Settings}>{renderMovies}</Slider></div>
       </div>
       <div className="movie-list">
         <h2>Series</h2>
-        <div className="movie-container">{renderSeries}</div>
+        <div className="movie-container"><Slider {...Settings}>{renderSeries}</Slider></div>
       </div>
     </div>
   );
