@@ -13,7 +13,9 @@ export default function Home() {
   useEffect(() => {
     const defaultMovie = "harry";
     const defaultSerie = "friends"
-    // dispatch execute an action "fetchAsyncMovies" from movieSlice and send it to the reducer
+    
+    // an action desceibes what have to be done
+    // a dispatch execute an action and send it to the reducer
     dispatch(fetchAsyncMovies(defaultMovie))
     dispatch(fetchAsyncSeries(defaultSerie))
     // an empty dependency option runs the effect only once - componentDidMount

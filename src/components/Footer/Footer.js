@@ -4,9 +4,9 @@ import "./Footer.scss";
 export default function Footer() {
     return (
         <div className='footer'>
-            <p>Movies Redux</p>
+            <h3>Movies Redux</h3>
             <p>@2022, First project of the year</p>
-            <p>Redux with redux-toolkit</p>
+            <h4>Redux with redux-toolkit by Joao P S Machado</h4>
         </div>
     )
 }

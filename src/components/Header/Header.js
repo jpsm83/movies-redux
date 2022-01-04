@@ -1,23 +1,29 @@
 import React, { useState } from "react";
-import { UserIcon } from "@heroicons/react/solid";
+import { UserIcon, SearchIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import "./Header.scss";
 import { useDispatch } from "react-redux";
-import { fetchAsyncMovies, fetchAsyncSeries } from "../../redux/movies/movieSlice";
+import {
+  fetchAsyncMovies,
+  fetchAsyncSeries,
+} from "../../redux/movies/movieSlice";
 
 export default function Header() {
-
-  const [term, setTerm] = useState('')
+  const [term, setTerm] = useState("");
 
   const dispatch = useDispatch();
 
   const submitHander = (e) => {
+    // event preventDefault prevent the page to refresh
     e.preventDefault();
-    if (!term) return alert("Please enter a valid movie or serie please!")
+    if (!term) return alert("Please enter a valid movie or serie please!");
+
+    // an action desceibes what have to be done
+    // a dispatch execute an action and send it to the reducer
     dispatch(fetchAsyncMovies(term));
     dispatch(fetchAsyncSeries(term));
-    setTerm('')
-  }
+    setTerm("");
+  };
 
   return (
     <div className="header">
@@ -26,8 +32,15 @@ export default function Header() {
       </Link>
       <div className="search-bar">
         <form onSubmit={submitHander}>
-          <input type="text" value={term} placeholder="Search Movies & Series" onChange={(e) => setTerm(e.target.value)} />
-          <button type="submit"></button>
+          <input
+            type="text"
+            value={term}
+            placeholder="Search Movies & Series"
+            onChange={(e) => setTerm(e.target.value)}
+          />
+          <button type="submit">
+            <SearchIcon className="search-icon" />
+          </button>
         </form>
       </div>
       <div className="user-image">
