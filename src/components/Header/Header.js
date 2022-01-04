@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UserIcon, SearchIcon } from "@heroicons/react/solid";
+import { SearchIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import "./Header.scss";
 import { useDispatch } from "react-redux";
