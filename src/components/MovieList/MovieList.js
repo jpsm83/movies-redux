@@ -13,38 +13,30 @@ export default function MovieList() {
   // useSelector allow us to select a function exported from "movieSlice"
   const movies = useSelector(getAllMovies);
   const series = useSelector(getAllSeries);
-  let renderMovies,
-    renderSeries = "";
-  renderMovies =
-    movies.Response === "True" ? (
-      movies.Search.map((movie, index) => (
-        <MovieCard key={index} data={movie} />
-      ))
-    ) : (
-      <div className="movies-error">{movies.Error}</div>
-    );
 
-  renderSeries =
-    series.Response === "True" ? (
-      series.Search.map((movie, index) => (
-        <MovieCard key={index} data={movie} />
+  const renderMoviesOrSeries = (moviesOrSeries) => {
+    return (
+      moviesOrSeries.Response === "True" ? (
+        moviesOrSeries.Search.map((movieOrSerie, index) => (
+        <MovieCard key={index} data={movieOrSerie} />
       ))
     ) : (
-      <div className="movies-error">{movies.Error}</div>
-    );
+      <div className="movies-error"><h3>Movie or serie not found!</h3></div>
+    )
+    )}
 
   return (
     <div className="movie-wrapper">
       <div className="movie-list">
         <h2>Movies</h2>
         <div className="movie-container">
-          <Slider {...Settings}>{renderMovies}</Slider>
+          <Slider {...Settings}>{renderMoviesOrSeries(movies)}</Slider>
         </div>
       </div>
       <div className="movie-list">
         <h2>Series</h2>
         <div className="movie-container">
-          <Slider {...Settings}>{renderSeries}</Slider>
+        <Slider {...Settings}>{renderMoviesOrSeries(series)}</Slider>
         </div>
       </div>
     </div>

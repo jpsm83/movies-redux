@@ -6,19 +6,19 @@ import movieApi from "../../common/apis/movieApi";
 // redux/toolkit allow us to combine "action", "constants" and "reducers" into one file
 
 export const fetchAsyncMovies = createAsyncThunk(
-  "movies/fetchAsyncMovies",
+  "imdb/fetchAsyncMovies",
   async (term) => {
     // call the imdb api to get the querry needed - read docs
     // store re response into a constante to be reused later
     const response = await movieApi.get(
       `?apikey=${APIKey}&s=${term}&type=movie`
     );
-      return response.data;
-    }
+    return response.data;
+  }
 );
 
 export const fetchAsyncSeries = createAsyncThunk(
-  "series/fetchAsyncSeries",
+  "imdb/fetchAsyncSeries",
   async (term) => {
     // call the imdb api to get the querry needed - read docs
     // store re response into a constante to be reused later
@@ -30,7 +30,7 @@ export const fetchAsyncSeries = createAsyncThunk(
 );
 
 export const fetchAsyncDetails = createAsyncThunk(
-  "movies/fetchAsyncDetails",
+  "detail/fetchAsyncDetails",
   async (id) => {
     // call the imdb api to get the querry needed - read docs
     // store re response into a constante to be reused later
@@ -46,7 +46,7 @@ const initialState = {
 };
 
 const movieSlice = createSlice({
-  name: "movies",
+  name: "imdb",
   initialState,
   reducers: {
     clearDetails: (state) => {
@@ -65,20 +65,36 @@ const movieSlice = createSlice({
     [fetchAsyncMovies.rejected]: () => {
       console.log("Rejected!");
     },
+
+    // "pending", "fulfilled", "rejected" defined the life cicle of the function "fetchAsyncSeries"
+    [fetchAsyncSeries.pending]: () => {
+      console.log("Pending");
+    },
     [fetchAsyncSeries.fulfilled]: (state, { payload }) => {
       console.log("Fetched Successfully!");
       return { ...state, series: payload };
     },
+    [fetchAsyncSeries.rejected]: () => {
+      console.log("Rejected!");
+    },
+
+    // "pending", "fulfilled", "rejected" defined the life cicle of the function "fetchAsyncDetails"
+    [fetchAsyncDetails.pending]: () => {
+      console.log("Pending");
+    },
     [fetchAsyncDetails.fulfilled]: (state, { payload }) => {
       console.log("Fetched Successfully!");
       return { ...state, selectedMovieOrSerie: payload };
+    },
+    [fetchAsyncDetails.rejected]: () => {
+      console.log("Rejected!");
     },
   },
 });
 
 export const { clearDetails } = movieSlice.actions;
 // state.<name of the movieSlice>.<property of initialState>
-export const getAllMovies = (state) => state.movies.movies;
-export const getAllSeries = (state) => state.movies.series;
-export const getSelectedDetail = (state) => state.movies.selectedMovieOrSerie;
+export const getAllMovies = (state) => state.imdb.movies;
+export const getAllSeries = (state) => state.imdb.series;
+export const getSelectedDetail = (state) => state.imdb.selectedMovieOrSerie;
 export default movieSlice.reducer;

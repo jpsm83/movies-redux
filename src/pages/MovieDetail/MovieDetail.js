@@ -13,13 +13,24 @@ export default function MovieDetail() {
 
   // useParams get any params needed
   const { imdbID } = useParams();
+
+  // useSelector allow us to select any function exported from "movieSlice"
   const data = useSelector(getSelectedDetail);
 
+  // useEffect is a hook that works as life cicle
+  // componentDidMount - DidUpdate - Unomnted
+  // thats the first function to be called
   useEffect(() => {
+    
+    // an action desceibes what have to be done
+    // a dispatch execute an action and send it to the reducer
     dispatch(fetchAsyncDetails(imdbID));
     return () => {
       dispatch(clearDetails());
     };
+
+    // an empty dependency option runs the effect only once - componentDidMount
+    // an dependency with a parameter runs the effect every time that parameter changes - componentDidUpdated
   }, [dispatch, imdbID]);
 
   return (
