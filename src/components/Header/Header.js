@@ -7,14 +7,14 @@ import {
   fetchAsyncMovies,
   fetchAsyncSeries,
 } from "../../redux/movies/movieSlice";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [term, setTerm] = useState("");
 
   const dispatch = useDispatch();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const submitHander = (e) => {
     // event preventDefault prevent the page to refresh
@@ -26,7 +26,7 @@ export default function Header() {
     dispatch(fetchAsyncMovies(term));
     dispatch(fetchAsyncSeries(term));
     setTerm("");
-    history.push("/");
+    navigate("/");
   };
 
   return (

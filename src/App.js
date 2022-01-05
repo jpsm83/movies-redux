@@ -4,7 +4,7 @@ import React from "react";
 // compare with previews versions - read the docs
 // react-router-dom 6+ has lots of change - read docs
 // here we are using react-router-dom 5.2.0
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "../src/pages/Home/Home";
 import PageNotFound from "../src/pages/PageNotFound/PageNotFound";
 import MovieDetail from "../src/pages/MovieDetail/MovieDetail";
@@ -16,17 +16,15 @@ import "./App.scss";
 export default function App() {
   return (
     <div className="app">
-      <Router>
         <Header />
         <div className="container">
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/movie/:imdbID" component={MovieDetail} />
-            <Route component={PageNotFound} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movie/:imdbID" element={<MovieDetail />} />
+            <Route element={<PageNotFound />} />
+          </Routes>
         </div>
         <Footer />
-      </Router>
     </div>
   );
 }
