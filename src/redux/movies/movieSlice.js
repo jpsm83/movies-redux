@@ -1,9 +1,11 @@
 // redux-toolkit give us extra features that makes easyer to work with redux
+// createAsyncThunk is a middleware from redux to make unsyncronous calls
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { APIKey } from "../../common/apis/movieApiKey";
 import movieApi from "../../common/apis/movieApi";
 
 // redux/toolkit allow us to combine "action", "constants" and "reducers" into one file
+// createAsyncThunk is a middleware from redux to make unsyncronous calls
 
 export const fetchAsyncMovies = createAsyncThunk(
   "imdb/fetchAsyncMovies",
@@ -17,6 +19,8 @@ export const fetchAsyncMovies = createAsyncThunk(
   }
 );
 
+// createAsyncThunk is a middleware from redux to make unsyncronous calls 
+
 export const fetchAsyncSeries = createAsyncThunk(
   "imdb/fetchAsyncSeries",
   async (term) => {
@@ -28,6 +32,8 @@ export const fetchAsyncSeries = createAsyncThunk(
     return response.data;
   }
 );
+
+// createAsyncThunk is a middleware from redux to make unsyncronous calls
 
 export const fetchAsyncDetails = createAsyncThunk(
   "detail/fetchAsyncDetails",
