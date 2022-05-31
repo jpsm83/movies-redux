@@ -11,7 +11,7 @@ export const fetchAsyncMovies = createAsyncThunk(
   "imdb/fetchAsyncMovies",
   async (term) => {
     // call the imdb api to get the querry needed - read docs
-    // store re response into a constante to be reused later
+    // response is store into a constante to be reused later
     const response = await movieApi.get(
       `?apikey=${APIKey}&s=${term}&type=movie`
     );
@@ -25,7 +25,7 @@ export const fetchAsyncSeries = createAsyncThunk(
   "imdb/fetchAsyncSeries",
   async (term) => {
     // call the imdb api to get the querry needed - read docs
-    // store re response into a constante to be reused later
+    // response is store into a constante to be reused later
     const response = await movieApi.get(
       `?apikey=${APIKey}&s=${term}&type=series`
     );
@@ -39,16 +39,16 @@ export const fetchAsyncDetails = createAsyncThunk(
   "detail/fetchAsyncDetails",
   async (id) => {
     // call the imdb api to get the querry needed - read docs
-    // store re response into a constante to be reused later
+    // store the response into a constante to be reused later
     const response = await movieApi.get(`?apikey=${APIKey}&i=${id}&Plot=full`);
     return response.data;
   }
 );
 
 const initialState = {
-  movies: {},
-  series: {},
-  selectedMovieOrSerie: {},
+  movies: [],
+  series: [],
+  selectedMovieOrSerie: ""
 };
 
 const movieSlice = createSlice({
@@ -56,7 +56,7 @@ const movieSlice = createSlice({
   initialState,
   reducers: {
     clearDetails: (state) => {
-      state.selectedMovieOrSerie = {};
+      state.selectedMovieOrSerie = ""
     },
   },
   extraReducers: {

@@ -17,6 +17,7 @@ export default function MovieList() {
 
   const renderMoviesOrSeries = (moviesOrSeries) => {
     return (
+      // Response & Search comes from redux - check redux dev tools to find it
       moviesOrSeries.Response === "True" ? (
         moviesOrSeries.Search.map((movieOrSerie, index) => (
         <MovieCard key={index} data={movieOrSerie} />
@@ -25,7 +26,7 @@ export default function MovieList() {
       <div className="movies-error"><h3>Movie or serie not found!</h3></div>
     )
     )}
-
+  
   return (
     <div>
       <div className="slider-container">

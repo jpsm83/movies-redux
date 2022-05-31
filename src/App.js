@@ -20,6 +20,8 @@ export default function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<Home />} />
+            {/* ":" at the route means the word follow is a dynamic parameter */}
+            {/* you can get those parameter using useParams in any component */}
             <Route path="/movie/:imdbID" element={<MovieDetail />} />
             <Route element={<PageNotFound />} />
           </Routes>

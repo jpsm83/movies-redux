@@ -17,7 +17,11 @@ import {
 export default function MovieDetail() {
   const dispatch = useDispatch();
 
-  // useParams get any params needed
+  // useParams get any params needed from the browser address
+  // our route = /movie/:imdbID
+  // our browser = http://localhost:3000/movie/tt0241527
+  // destructure "imdbID" parameter = tt0241527
+  // browser can have "infinity" parameters and you can get it destructuring it on the useParams
   const { imdbID } = useParams();
 
   // useSelector allow us to select any function exported from "movieSlice"

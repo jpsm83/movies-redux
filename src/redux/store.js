@@ -5,6 +5,7 @@ import movieReducers from "../redux/movies/movieSlice";
 
 export const store = configureStore({
   reducer: {
+    // same name as the slice you want use the reducers - "imdb" from "movieSlice"
     imdb: movieReducers,
   },
 });
